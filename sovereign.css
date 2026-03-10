@@ -1,0 +1,459 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   MERICA Sovereign v8.8  –  Component Styles
+   Append to existing index.css / globals.css
+   Uses existing CSS custom properties from prior build:
+     --bg-deep, --red, --blue, --font-mono, --muted, --blue-bright
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* ── Shared utility ─────────────────────────────────────────────────────── */
+.truncate   { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:100%; display:inline-block; }
+.text-green { color:#22c55e; }
+.text-red   { color:#ef4444; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   POLICE RADIAL HUD
+   ───────────────────────────────────────────────────────────────────────── */
+.radial-overlay {
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.45);
+  z-index:9000;
+}
+.radial-root {
+  position:relative;
+  width:320px; height:320px;
+}
+.radial-center {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  display:flex; flex-direction:column; align-items:center; gap:4px;
+  z-index:2;
+}
+.radial-center-icon { font-size:28px; }
+.radial-back {
+  font-family:var(--font-mono); font-size:10px;
+  color:var(--blue-bright); cursor:pointer;
+  letter-spacing:1px;
+}
+.radial-btn {
+  position:absolute; top:50%; left:50%;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  border:2px solid transparent; border-radius:50%;
+  background:rgba(5,8,16,0.92);
+  cursor:pointer; transition:transform 0.15s, background 0.15s;
+  gap:2px;
+}
+.radial-btn:hover, .radial-btn--hover {
+  transform:translate(-50%,-50%) scale(1.18) !important;
+  background:rgba(29,78,216,0.25);
+}
+.radial-btn--locked { cursor:not-allowed; }
+.radial-btn-icon  { font-size:16px; line-height:1; }
+.radial-btn-label { font-family:var(--font-mono); font-size:7px; letter-spacing:0.5px; color:#cbd5e1; white-space:nowrap; }
+.radial-submenu-arrow { position:absolute; top:2px; right:3px; font-size:7px; color:#94a3b8; }
+.radial-lock { position:absolute; bottom:1px; right:3px; font-size:9px; opacity:0.8; }
+.radial-tooltip {
+  position:fixed; bottom:12%; left:50%; transform:translateX(-50%);
+  background:rgba(5,8,16,0.95); border:1px solid #1e3a5f;
+  padding:8px 16px; border-radius:4px;
+  font-family:var(--font-mono); font-size:11px; color:#e2e8f0;
+  display:flex; flex-direction:column; align-items:center; gap:3px;
+  z-index:9001; pointer-events:none;
+}
+.radial-tooltip-cert   { color:#f59e0b; font-size:10px; }
+.radial-tooltip-locked { color:#ef4444; font-size:10px; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   MEDICAL TRAUMA HUD
+   ───────────────────────────────────────────────────────────────────────── */
+.trauma-overlay {
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.6);
+  z-index:8500;
+}
+.trauma-hud {
+  background:rgba(5,8,16,0.97); border:1px solid #164e63;
+  border-radius:8px; width:760px; max-height:90vh; overflow:hidden;
+  display:flex; flex-direction:column;
+  box-shadow:0 0 40px rgba(6,182,212,0.15);
+}
+.trauma-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:14px 18px; border-bottom:1px solid #0f3b4a;
+  background:linear-gradient(135deg,rgba(6,182,212,0.08) 0%,transparent 100%);
+}
+.trauma-title   { font-family:var(--font-mono); font-size:15px; color:#67e8f9; letter-spacing:2px; margin:0; }
+.trauma-patient { font-size:12px; color:#94a3b8; margin:3px 0 0; }
+.trauma-rank-badge {
+  font-family:var(--font-mono); font-size:10px; letter-spacing:1.5px;
+  border:1px solid #06b6d4; color:#06b6d4; padding:4px 10px; border-radius:3px;
+}
+.trauma-body { display:flex; gap:0; flex:1; overflow:hidden; }
+
+/* Body map */
+.trauma-bodymap {
+  display:flex; align-items:center; justify-content:center;
+  padding:18px; border-right:1px solid #0f3b4a;
+  background:rgba(0,0,0,0.2);
+}
+
+/* Right panel */
+.trauma-right {
+  flex:1; display:flex; flex-direction:column; gap:14px;
+  padding:18px; overflow-y:auto;
+}
+.trauma-select-prompt {
+  display:flex; align-items:center; gap:10px; color:#475569;
+  font-style:italic; padding:20px 0;
+}
+.trauma-arrow { font-size:22px; }
+.trauma-zone-editor { display:flex; flex-direction:column; gap:10px; }
+.zone-title { font-family:var(--font-mono); font-size:13px; color:#67e8f9; margin:0; }
+.zone-field-label { font-size:10px; color:#64748b; letter-spacing:1px; text-transform:uppercase; }
+.severity-btns { display:flex; gap:6px; flex-wrap:wrap; margin-top:5px; }
+.severity-btn {
+  font-family:var(--font-mono); font-size:10px; padding:4px 10px;
+  background:transparent; border:1px solid transparent;
+  border-radius:2px; cursor:pointer; color:#94a3b8; transition:all 0.15s;
+}
+.severity-btn--active { background:rgba(255,255,255,0.07); color:#e2e8f0; }
+.zone-flags { display:flex; gap:16px; font-size:12px; color:#94a3b8; }
+.zone-flags label { display:flex; align-items:center; gap:5px; cursor:pointer; }
+.zone-treatments { display:flex; flex-direction:column; gap:5px; margin-top:4px; }
+.treatment-btn {
+  display:flex; align-items:center; gap:6px; justify-content:space-between;
+  padding:6px 10px; font-family:var(--font-mono); font-size:11px;
+  background:rgba(255,255,255,0.03); border:1px solid #1e3a5f;
+  border-radius:3px; cursor:pointer; color:#94a3b8; transition:all 0.15s;
+}
+.treatment-btn--applied { border-color:#22c55e; color:#22c55e; background:rgba(34,197,94,0.06); }
+.treatment-btn--locked  { opacity:0.35; cursor:not-allowed; }
+.treatment-check { color:#22c55e; margin-left:auto; }
+.treatment-lock  { color:#64748b; margin-left:auto; font-size:10px; }
+
+/* Bill */
+.trauma-bill {
+  margin-top:auto; padding:12px; background:rgba(0,0,0,0.3);
+  border:1px solid #1e3a5f; border-radius:4px;
+}
+.bill-row { display:flex; justify-content:space-between; font-size:12px; padding:3px 0; }
+.bill-row--total { border-top:1px solid #1e3a5f; padding-top:6px; margin-top:3px; }
+.bill-label     { color:#64748b; }
+.bill-value     { font-family:var(--font-mono); color:#e2e8f0; }
+.bill-insurance { color:#22c55e; }
+.bill-patient   { color:#f59e0b; font-size:14px; }
+.bill-overdraft-note { font-size:9px; color:#475569; margin:5px 0 0; font-style:italic; }
+
+/* Submit */
+.trauma-submit {
+  width:100%; padding:10px; font-family:var(--font-mono); font-size:12px;
+  letter-spacing:1.5px; background:linear-gradient(90deg,#164e63,#0e7490);
+  border:1px solid #0e7490; color:#e2e8f0; cursor:pointer; border-radius:3px;
+  transition:all 0.15s;
+}
+.trauma-submit--done { background:linear-gradient(90deg,#14532d,#22c55e)!important; }
+.trauma-submit:disabled { opacity:0.6; cursor:not-allowed; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   REPO TABLET
+   ───────────────────────────────────────────────────────────────────────── */
+.repo-overlay {
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.55); z-index:8200;
+}
+.repo-tablet {
+  background:rgba(5,8,16,0.97); border:1px solid #1e3a5f;
+  border-radius:8px; width:600px; max-height:88vh;
+  display:flex; flex-direction:column; overflow:hidden;
+}
+.repo-header {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 16px; border-bottom:1px solid #1e3a5f;
+  background:linear-gradient(135deg,rgba(245,158,11,0.06) 0%,transparent 100%);
+}
+.repo-logo { font-family:var(--font-mono); font-size:13px; color:#fbbf24; letter-spacing:2px; }
+.repo-header-right { display:flex; align-items:center; gap:10px; }
+.repo-ceeu-badge {
+  display:flex; align-items:center; gap:5px;
+  font-family:var(--font-mono); font-size:10px; color:#06b6d4;
+  border:1px solid #0e7490; padding:3px 8px; border-radius:2px;
+}
+.ceeu-dot { width:6px; height:6px; border-radius:50%; background:#06b6d4; animation:pulse-dot 1.5s infinite; }
+.repo-close { background:none; border:none; color:#64748b; cursor:pointer; font-size:15px; }
+.repo-tabs { display:flex; border-bottom:1px solid #0f172a; }
+.repo-tab {
+  flex:1; padding:8px; font-family:var(--font-mono); font-size:11px;
+  background:none; border:none; border-bottom:2px solid transparent;
+  color:#64748b; cursor:pointer; letter-spacing:1px;
+}
+.repo-tab--active { color:#fbbf24; border-bottom-color:#fbbf24; }
+.repo-list { overflow-y:auto; padding:12px; display:flex; flex-direction:column; gap:10px; }
+.repo-empty { text-align:center; color:#475569; font-style:italic; padding:24px; }
+.repo-card {
+  background:rgba(255,255,255,0.02); border:1px solid #1e3a5f;
+  border-radius:5px; padding:12px; display:flex; flex-direction:column; gap:8px;
+  transition:border-color 0.2s;
+}
+.repo-card:hover { border-color:#334155; }
+.repo-card--inactive { opacity:0.5; }
+.repo-card-top { display:flex; justify-content:space-between; align-items:flex-start; }
+.repo-plate { font-family:var(--font-mono); font-size:16px; color:#e2e8f0; letter-spacing:2px; }
+.repo-model { font-size:11px; color:#64748b; max-width:140px; }
+.repo-card-status { display:flex; flex-direction:column; align-items:flex-end; gap:4px; }
+.repo-status-badge {
+  font-family:var(--font-mono); font-size:9px; padding:2px 7px; border-radius:2px; letter-spacing:1px;
+}
+.repo-status-badge--active   { background:rgba(34,197,94,0.15); color:#22c55e; border:1px solid #22c55e; }
+.repo-status-badge--executed { background:rgba(100,116,139,0.15); color:#94a3b8; border:1px solid #475569; }
+.repo-status-badge--cancelled{ background:rgba(220,38,38,0.15);  color:#ef4444; border:1px solid #ef4444; }
+.repo-amount { font-family:var(--font-mono); font-size:13px; color:#fbbf24; }
+.repo-card-meta { display:grid; grid-template-columns:1fr 1fr; gap:4px; }
+.repo-meta-item { display:flex; flex-direction:column; }
+.repo-meta-label { font-size:9px; color:#475569; letter-spacing:0.5px; text-transform:uppercase; }
+.repo-meta-value { font-family:var(--font-mono); font-size:11px; color:#94a3b8; max-width:120px; }
+.repo-gps-row { display:flex; align-items:flex-start; gap:10px; flex-wrap:wrap; }
+.repo-ping-btn {
+  font-family:var(--font-mono); font-size:10px; padding:6px 12px;
+  background:rgba(6,182,212,0.1); border:1px solid #0e7490;
+  color:#06b6d4; cursor:pointer; border-radius:3px; letter-spacing:1px;
+  transition:all 0.15s;
+}
+.repo-ping-btn:hover:not(:disabled) { background:rgba(6,182,212,0.2); }
+.repo-ping-btn--loading  { opacity:0.7; cursor:wait; }
+.repo-ping-btn--inactive { border-color:#ef4444; color:#ef4444; background:rgba(220,38,38,0.08); }
+.repo-ping-result {
+  display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+  font-family:var(--font-mono); font-size:10px;
+}
+.repo-ping-result--active { color:#22c55e; }
+.repo-ping-result--none   { color:#f59e0b; }
+.ping-coord   { color:#67e8f9; }
+.ping-age     { color:#64748b; }
+.ping-no-ceeu { color:#f59e0b; }
+.ping-blip-btn {
+  font-family:var(--font-mono); font-size:9px; padding:3px 8px;
+  background:rgba(34,197,94,0.1); border:1px solid #22c55e; color:#22c55e;
+  cursor:pointer; border-radius:2px;
+}
+.repo-execute-btn {
+  width:100%; padding:7px; font-family:var(--font-mono); font-size:11px;
+  background:rgba(34,197,94,0.08); border:1px solid #22c55e;
+  color:#22c55e; cursor:pointer; border-radius:3px; letter-spacing:1px;
+  transition:background 0.15s;
+}
+.repo-execute-btn:hover { background:rgba(34,197,94,0.18); }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   AUCTION HUB
+   ───────────────────────────────────────────────────────────────────────── */
+.auction-hub {
+  padding:20px; max-width:1100px; margin:0 auto;
+}
+.auction-close-btn {
+  position:fixed; top:14px; right:16px;
+  font-family:var(--font-mono); font-size:11px;
+  background:rgba(220,38,38,0.12); border:1px solid #dc2626;
+  color:#ef4444; padding:6px 14px; cursor:pointer; border-radius:3px;
+  z-index:9100;
+}
+.auction-header  { margin-bottom:16px; }
+.auction-title   { font-family:var(--font-mono); font-size:20px; color:#fbbf24; letter-spacing:3px; margin:0; }
+.auction-subtitle{ color:#64748b; font-size:12px; margin:4px 0 0; }
+.auction-filters { display:flex; gap:8px; margin-bottom:14px; }
+.auction-filter-btn {
+  font-family:var(--font-mono); font-size:11px; padding:5px 14px;
+  background:none; border:1px solid #1e3a5f; color:#64748b; cursor:pointer; border-radius:2px;
+  transition:all 0.15s;
+}
+.auction-filter-btn--active { border-color:#fbbf24; color:#fbbf24; }
+.auction-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(300px,1fr)); gap:14px;
+}
+.auction-card {
+  background:rgba(5,8,16,0.95); border:1px solid #1e3a5f;
+  border-radius:6px; padding:14px; display:flex; flex-direction:column; gap:10px;
+  transition:border-color 0.2s;
+}
+.auction-card--winning { border-color:#fbbf24; box-shadow:0 0 12px rgba(251,191,36,0.1); }
+.auction-card--ended   { opacity:0.6; }
+.auction-card-top { display:flex; justify-content:space-between; }
+.auction-plate { font-family:var(--font-mono); font-size:17px; color:#e2e8f0; letter-spacing:2px; }
+.auction-model { font-size:11px; color:#64748b; margin-top:2px; max-width:130px; }
+.auction-badges { display:flex; flex-direction:column; align-items:flex-end; gap:3px; }
+.badge {
+  font-family:var(--font-mono); font-size:9px; padding:2px 6px;
+  border-radius:2px; letter-spacing:0.5px;
+}
+.badge--npc     { background:rgba(100,116,139,0.2); color:#94a3b8; border:1px solid #475569; }
+.badge--winning { background:rgba(251,191,36,0.15); color:#fbbf24; border:1px solid #fbbf24; }
+.badge--active  { background:rgba(34,197,94,0.1);  color:#22c55e; border:1px solid #22c55e; }
+.badge--ended   { background:rgba(220,38,38,0.1);  color:#ef4444; border:1px solid #ef4444; }
+.auction-bid-info { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+.auction-stat { display:flex; flex-direction:column; }
+.auction-stat-label { font-size:9px; color:#475569; letter-spacing:0.5px; text-transform:uppercase; }
+.auction-stat-value { font-family:var(--font-mono); font-size:12px; color:#e2e8f0; margin-top:2px; }
+.auction-stat-value--primary { font-size:16px; color:#fbbf24; }
+.auction-bid-row { display:flex; gap:8px; align-items:stretch; }
+.auction-bid-input-wrap {
+  display:flex; align-items:center; flex:1;
+  background:rgba(255,255,255,0.03); border:1px solid #1e3a5f; border-radius:3px;
+  overflow:hidden;
+}
+.auction-dollar { padding:0 8px; color:#64748b; font-family:var(--font-mono); font-size:13px; }
+.auction-bid-input {
+  flex:1; background:transparent; border:none; outline:none;
+  color:#e2e8f0; font-family:var(--font-mono); font-size:13px; padding:7px 6px;
+}
+.auction-bid-btn {
+  font-family:var(--font-mono); font-size:11px; padding:8px 14px;
+  background:linear-gradient(90deg,#1d4ed8,#2563eb); border:none;
+  color:#fff; cursor:pointer; border-radius:3px; letter-spacing:1px; transition:all 0.15s;
+}
+.auction-bid-btn--done { background:linear-gradient(90deg,#14532d,#22c55e)!important; }
+.auction-bid-btn:disabled { opacity:0.6; cursor:not-allowed; }
+.auction-bid-error { color:#ef4444; font-size:11px; font-family:var(--font-mono); margin:0; }
+.auction-sold-notice { color:#22c55e; font-family:var(--font-mono); font-size:12px; text-align:center; padding:6px; }
+.auction-loading, .auction-error, .auction-empty {
+  text-align:center; padding:40px; color:#475569; font-style:italic;
+}
+.auction-error { color:#ef4444; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   TROPHY RACK
+   ───────────────────────────────────────────────────────────────────────── */
+.trophy-overlay {
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,0.6); z-index:8000;
+}
+.trophy-rack {
+  background:rgba(5,8,16,0.97); border:1px solid #292524;
+  border-radius:8px; width:760px; max-height:90vh;
+  display:flex; flex-direction:column; overflow:hidden;
+  box-shadow:0 0 40px rgba(251,191,36,0.08);
+}
+.trophy-header {
+  display:flex; justify-content:space-between; align-items:flex-start;
+  padding:16px 18px; border-bottom:1px solid #1c1917;
+  background:linear-gradient(135deg,rgba(251,191,36,0.06) 0%,transparent 100%);
+}
+.trophy-title    { font-family:var(--font-mono); font-size:16px; color:#fbbf24; letter-spacing:2px; margin:0; }
+.trophy-subtitle { color:#64748b; font-size:11px; margin:4px 0 0; }
+.trophy-close { background:none; border:none; color:#64748b; cursor:pointer; font-size:18px; }
+
+/* Leaderboard */
+.trophy-leaderboard { padding:10px 18px; border-bottom:1px solid #1c1917; }
+.trophy-lb-title { font-size:10px; color:#64748b; letter-spacing:1px; text-transform:uppercase; margin:0 0 6px; }
+.trophy-lb-list { display:flex; gap:8px; flex-wrap:wrap; }
+.trophy-lb-row {
+  display:flex; align-items:center; gap:6px;
+  background:rgba(251,191,36,0.05); border:1px solid #292524;
+  padding:4px 10px; border-radius:3px; font-size:11px;
+}
+.trophy-lb-rank  { font-family:var(--font-mono); color:#fbbf24; }
+.trophy-lb-org   { color:#e2e8f0; max-width:100px; }
+.trophy-lb-count { font-family:var(--font-mono); color:#64748b; font-size:10px; }
+
+/* Filters */
+.trophy-filters { padding:10px 18px; display:flex; flex-direction:column; gap:8px; border-bottom:1px solid #1c1917; }
+.trophy-search {
+  background:rgba(255,255,255,0.03); border:1px solid #292524;
+  border-radius:3px; padding:7px 12px; color:#e2e8f0;
+  font-family:var(--font-mono); font-size:11px; outline:none;
+}
+.trophy-type-filters { display:flex; gap:6px; flex-wrap:wrap; }
+.trophy-type-btn {
+  font-family:var(--font-mono); font-size:10px; padding:4px 10px;
+  background:none; border:1px solid #292524; color:#64748b; cursor:pointer; border-radius:2px;
+  transition:all 0.15s;
+}
+.trophy-type-btn--active { border-color:#fbbf24; color:#fbbf24; }
+
+/* Grid */
+.trophy-grid {
+  overflow-y:auto; padding:14px 18px;
+  display:grid; grid-template-columns:repeat(auto-fill,minmax(210px,1fr)); gap:10px;
+}
+.trophy-empty { text-align:center; padding:40px; color:#475569; font-style:italic; }
+.trophy-card {
+  background:rgba(255,255,255,0.02); border:1px solid transparent;
+  border-radius:5px; padding:10px; cursor:pointer;
+  transition:all 0.15s; display:flex; flex-direction:column; gap:6px;
+}
+.trophy-card:hover { background:rgba(255,255,255,0.04); }
+.trophy-plaque { display:flex; align-items:center; gap:8px; padding:8px; border-radius:4px; }
+.trophy-icon   { font-size:22px; }
+.trophy-type   { font-family:var(--font-mono); font-size:11px; letter-spacing:1px; margin:0; }
+.trophy-org    { font-size:11px; color:#94a3b8; margin:2px 0 0; max-width:120px; }
+.trophy-meta   { display:flex; justify-content:space-between; font-size:10px; color:#475569; }
+.trophy-data   { border-top:1px solid #1c1917; padding-top:6px; display:flex; flex-direction:column; gap:3px; }
+.trophy-data-row   { display:flex; justify-content:space-between; font-size:10px; }
+.trophy-data-key   { color:#475569; }
+.trophy-data-val   { font-family:var(--font-mono); color:#94a3b8; max-width:100px; }
+.trophy-expand-hint{ font-size:9px; color:#334155; text-align:right; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   FEDERAL DASHBOARD v8.8 additions
+   ───────────────────────────────────────────────────────────────────────── */
+.fed-badge-new {
+  margin-left:6px; font-family:var(--font-mono); font-size:8px;
+  background:rgba(34,197,94,0.15); color:#22c55e;
+  border:1px solid #22c55e; padding:1px 5px; border-radius:2px; letter-spacing:1px;
+}
+.cctv-panel { padding:4px 0; }
+.cctv-desc { color:#64748b; font-size:12px; margin:0 0 16px; line-height:1.5; }
+.cctv-readouts { display:flex; gap:10px; margin-top:14px; }
+.audit-panel { overflow:hidden; }
+.audit-table { overflow-x:auto; }
+.audit-thead {
+  display:grid; grid-template-columns:80px 160px 100px 100px 100px 80px;
+  padding:6px 10px; background:rgba(0,0,0,0.3);
+  font-family:var(--font-mono); font-size:9px; color:#475569; letter-spacing:1px;
+  border-bottom:1px solid #0f172a;
+}
+.audit-row {
+  display:grid; grid-template-columns:80px 160px 100px 100px 100px 80px;
+  padding:5px 10px; font-size:11px; border-bottom:1px solid rgba(255,255,255,0.03);
+  transition:background 0.1s;
+}
+.audit-row:hover { background:rgba(255,255,255,0.02); }
+.audit-row--siphon  { border-left:2px solid #3b82f6; }
+.audit-row--payroll { border-left:2px solid #22c55e; }
+.audit-row--seizure { border-left:2px solid #ef4444; }
+.audit-row--medical { border-left:2px solid #06b6d4; }
+.audit-row--auction { border-left:2px solid #fbbf24; }
+.audit-row--neutral { border-left:2px solid #334155; }
+.audit-ts     { font-family:var(--font-mono); font-size:10px; color:#64748b; }
+.audit-event  { font-family:var(--font-mono); font-size:10px; color:#94a3b8; max-width:155px; }
+.audit-actor,
+.audit-target { font-size:10px; color:#64748b; max-width:95px; }
+.audit-amount { font-family:var(--font-mono); font-size:11px; color:#e2e8f0; }
+.audit-hash   { font-family:var(--font-mono); font-size:9px; color:#334155; cursor:help; }
+.audit-empty  { padding:24px; text-align:center; color:#334155; font-style:italic; }
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Grappler status indicator (persistent HUD overlay when active)
+   ───────────────────────────────────────────────────────────────────────── */
+.grappler-indicator {
+  position:fixed; bottom:18px; left:50%; transform:translateX(-50%);
+  display:flex; align-items:center; gap:8px;
+  background:rgba(220,38,38,0.12); border:1px solid #dc2626;
+  padding:6px 16px; border-radius:3px;
+  font-family:var(--font-mono); font-size:11px; color:#ef4444;
+  letter-spacing:1.5px; z-index:7500;
+  animation:pulse-border 1s ease-in-out infinite;
+}
+@keyframes pulse-border {
+  0%,100% { box-shadow:0 0 0 0 rgba(220,38,38,0.5); }
+  50%      { box-shadow:0 0 0 6px rgba(220,38,38,0); }
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Shared pulse animation (used in status dots, ceeu dot)
+   ───────────────────────────────────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0%,100% { box-shadow:0 0 0 0 rgba(6,182,212,0.7); }
+  50%      { box-shadow:0 0 0 5px rgba(6,182,212,0); }
+}
